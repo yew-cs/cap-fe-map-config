@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml"
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+
+
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="CatalogService"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="BaseMaps" EntityType="CatalogService.BaseMaps" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1" sap:semantics="fixed-values"/>
+                <EntitySet Name="MapConfiguration" EntityType="CatalogService.MapConfiguration"/>
+                <EntitySet Name="MapConfiguration_texts" EntityType="CatalogService.MapConfiguration_texts"/>
+                <EntitySet Name="MapRenderer" EntityType="CatalogService.MapRenderer"/>
+                <AssociationSet Name="MapConfiguration_baseMapType" Association="CatalogService.MapConfiguration_baseMapType">
+                    <End Role="MapConfiguration" EntitySet="MapConfiguration"/>
+                    <End Role="BaseMaps" EntitySet="BaseMaps"/>
+                </AssociationSet>
+                <AssociationSet Name="MapConfiguration_mapRendererType" Association="CatalogService.MapConfiguration_mapRendererType">
+                    <End Role="MapConfiguration" EntitySet="MapConfiguration"/>
+                    <End Role="MapRenderer" EntitySet="MapRenderer"/>
+                </AssociationSet>
+                <AssociationSet Name="MapConfiguration_texts_1" Association="CatalogService.MapConfiguration_texts_1">
+                    <End Role="MapConfiguration" EntitySet="MapConfiguration"/>
+                    <End Role="MapConfiguration_texts" EntitySet="MapConfiguration_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="MapConfiguration_localized" Association="CatalogService.MapConfiguration_localized">
+                    <End Role="MapConfiguration" EntitySet="MapConfiguration"/>
+                    <End Role="MapConfiguration_texts" EntitySet="MapConfiguration_texts"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="BaseMaps">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false" sap:value-list="fixed-values" />
+                <Property Name="bmType" Type="Edm.String" MaxLength="111"/>
+                <Property Name="bmDesc" Type="Edm.String" MaxLength="111"/>
+                <Property Name="ImageUrl" Type="Edm.String" MaxLength="111"/>
+                <Property Name="endPoint" Type="Edm.String"/>
+                <Property Name="summary" Type="Edm.String"/>
+                <NavigationProperty Name="mapconfiguration" Relationship="CatalogService.MapConfiguration_baseMapType" FromRole="BaseMaps" ToRole="MapConfiguration"/>
+            </EntityType>
+            <EntityType Name="MapConfiguration">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String" MaxLength="30"/>
+                <Property Name="description" Type="Edm.String" MaxLength="60"/>
+                <NavigationProperty Name="baseMapType" Relationship="CatalogService.MapConfiguration_baseMapType" FromRole="MapConfiguration" ToRole="BaseMaps"/>
+                <Property Name="defaultMapConfiguration" Type="Edm.Boolean"/>
+                <Property Name="defaultCenter" Type="Edm.String"/>
+                <Property Name="defaultZoomLevel" Type="Edm.Int32"/>
+                <Property Name="maxZoom" Type="Edm.Int32"/>
+                <Property Name="attribution" Type="Edm.String" MaxLength="60"/>
+                <Property Name="accessToken" Type="Edm.String" MaxLength="100"/>
+                <NavigationProperty Name="mapRendererType" Relationship="CatalogService.MapConfiguration_mapRendererType" FromRole="MapConfiguration" ToRole="MapRenderer"/>
+                <NavigationProperty Name="texts" Relationship="CatalogService.MapConfiguration_texts_1" FromRole="MapConfiguration" ToRole="MapConfiguration_texts"/>
+                <NavigationProperty Name="localized" Relationship="CatalogService.MapConfiguration_localized" FromRole="MapConfiguration" ToRole="MapConfiguration_texts"/>
+                <Property Name="baseMapType_ID" Type="Edm.Int32"/>
+                <Property Name="mapRendererType_ID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="MapConfiguration_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="description" Type="Edm.String" MaxLength="60"/>
+            </EntityType>
+            <EntityType Name="MapRenderer">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="mrType" Type="Edm.String" MaxLength="30"/>
+                <NavigationProperty Name="mapconfiguration" Relationship="CatalogService.MapConfiguration_mapRendererType" FromRole="MapRenderer" ToRole="MapConfiguration"/>
+            </EntityType>
+            <Association Name="MapConfiguration_baseMapType">
+                <End Role="MapConfiguration" Type="CatalogService.MapConfiguration" Multiplicity="*"/>
+                <End Role="BaseMaps" Type="CatalogService.BaseMaps" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="BaseMaps">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="MapConfiguration">
+                        <PropertyRef Name="baseMapType_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="MapConfiguration_mapRendererType">
+                <End Role="MapConfiguration" Type="CatalogService.MapConfiguration" Multiplicity="*"/>
+                <End Role="MapRenderer" Type="CatalogService.MapRenderer" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="MapRenderer">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="MapConfiguration">
+                        <PropertyRef Name="mapRendererType_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="MapConfiguration_texts_1">
+                <End Role="MapConfiguration" Type="CatalogService.MapConfiguration" Multiplicity="*"/>
+                <End Role="MapConfiguration_texts" Type="CatalogService.MapConfiguration_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="MapConfiguration_localized">
+                <End Role="MapConfiguration" Type="CatalogService.MapConfiguration" Multiplicity="*"/>
+                <End Role="MapConfiguration_texts" Type="CatalogService.MapConfiguration_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="MapConfiguration_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="MapConfiguration">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="CatalogService.BaseMaps/ID"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Base Map ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.BaseMaps/bmType"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Base Map Type"/>
+            </Annotations>
+            <Annotations Target="CatalogService.BaseMaps/bmDesc"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Base Map Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.BaseMaps/ImageUrl"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Map Sample"/>
+                <Annotation Term="UI.IsImageURL" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.BaseMaps/endPoint"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Endpoint"/>
+            </Annotations>
+            <Annotations Target="CatalogService.BaseMaps/summary"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Summary text"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.CollectionFacet">
+                            <PropertyValue Property="Label" String="Map Info"/>
+                            <PropertyValue Property="Facets">
+                                <Collection>
+                                    <Record Type="UI.ReferenceFacet">
+                                        <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#Main"/>
+                                        <PropertyValue Property="Label" String="Main Facet"/>
+                                    </Record>
+                                </Collection>
+                            </PropertyValue>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="Main">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="name"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="description"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="baseMapType/bmType"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="baseMapType/bmDesc"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="baseMapType/endPoint"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="baseMapType/summary"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="defaultMapConfiguration"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="mapRendererType/mrType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Map Configuration"/>
+                        <PropertyValue Property="TypeNamePlural" String="Map Configurations"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="baseMapType/bmType"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="defaultMapConfiguration"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="defaultCenter"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="defaultZoomLevel"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="maxZoom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="attribution"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="accessToken"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="mapRendererType/mrType"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>name</PropertyPath>
+                        <PropertyPath>baseMapType_ID</PropertyPath>
+                        <PropertyPath>mapRendererType_ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/name"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/description"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/baseMapType"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Base map type"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/defaultMapConfiguration"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Default Map Configuration"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/defaultCenter"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Default Center"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/defaultZoomLevel"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Default Zoom Level"/>
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/maxZoom"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Max Zoom"/>
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/attribution"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Attributions"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/accessToken"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Access Tokens"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/mapRendererType"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Map Renderer Types"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration/baseMapType_ID"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Base map type"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="BaseMaps"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="baseMapType_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="bmType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
+            </Annotations>
+
+            <Annotations Target="CatalogService.MapConfiguration/mapRendererType_ID"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+                <Annotation Term="Common.Label" String="Map Renderer Type"/>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="MapRenderer"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="mapRendererType_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="mrType"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
+            </Annotations>
+            <Annotations Target="CatalogService.MapConfiguration_texts/description"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapRenderer/ID"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Map Renderer ID"/>
+            </Annotations>
+            <Annotations Target="CatalogService.MapRenderer/mrType"
+                xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Map Renderer Type"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
