@@ -7,22 +7,22 @@ using {
 namespace com.sap.rizing;
 
 entity MapConfiguration : cuid, managed {
-        name                    : String(30);
-        description             : localized String(60);
-        baseMapType             : Association to BaseMaps;
-        defaultMapConfiguration : Boolean;
-        defaultCenter           : String;
-        defaultZoomLevel        : Integer                    @assert.range : [
+        name                    : String(30)                 @mandatory;
+        description             : String(60);
+        baseMapType             : Association to BaseMaps    @mandatory;
+        defaultMapConfiguration : Boolean                    @mandatory;
+        defaultCenter           : String                     @mandatory;
+        defaultZoomLevel        : Integer                    @mandatory  @assert.range : [
                 0,
                 100
         ];
-        maxZoom                 : Integer                    @assert.range : [
+        maxZoom                 : Integer                    @assert.range :             [
                 0,
                 100
         ];
         attribution             : String(60);
         accessToken             : String(100);
-        mapRendererType         : Association to MapRenderer @title        : 'Map Renderer Type';
+        mapRendererType         : Association to MapRenderer @title        :             'Map Renderer Type';
 
 }
 
@@ -44,3 +44,4 @@ entity MapRenderer : cuid, managed {
                                        on mapconfiguration.mapRendererType = $self;
 
 }
+
