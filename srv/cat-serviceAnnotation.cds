@@ -21,20 +21,21 @@ annotate CatalogService.MapConfiguration with @(
             Description    : {Value : description},
             ImageUrl       : baseMapType.ImageUrl,
 
-
-        //  : baseMapType.summary},
         },
         LineItem                       : {$value : [
             {Value : name},
             {Value : description},
             {Value : baseMapType.bmType},
+            {Value : mapRendererType.mrType},
             // {Value : baseMapType.ImageUrl},
-            {Value : defaultMapConfiguration, Criticality:level},
+            {
+                Value       : defaultMapConfiguration,
+                Criticality : level
+            },
             {Value : defaultCenter},
-            {Value : maxZoom},
             {Value : attribution},
             {Value : accessToken},
-            {Value : mapRendererType.mrType}
+
 
         ]},
 
@@ -43,38 +44,45 @@ annotate CatalogService.MapConfiguration with @(
             Target : '@UI.FieldGroup#MapConfigurations',
         }],
         FieldGroup #MapConfigurations  : {Data : [
-            {Value : defaultMapConfiguration ,Criticality:level},
-            {Value : baseMapType.bmType},
-            {Value : baseMapType.bmDesc},
-            {Value : mapRendererType.mrType},
-            {Value : baseMapType.summary}
-        ]},
+
+        {Value : baseMapType.summary}]},
         Facets                         : [{
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.FieldGroup#GeneralInformation',
             Label  : '{i18n>GeneralInformation}'
         }],
-        FieldGroup #GeneralInformation : {Data: [
-            // {Value : baseMapType.ImageUrl},
-            {Value : name},
-            {Value : description},
+        FieldGroup #GeneralInformation : {Data : [
+
             {Value : baseMapType_ID},
             {Value : mapRendererType_ID},
+            {
+                Value             : defaultMapConfiguration,
+                Criticality       : level,
+                ![@UI.Importance] : #High
+            },
             {Value : defaultCenter},
             {Value : defaultZoomLevel},
+            {Value : maxZoom},
+            {Value : attribution},
             {Value : accessToken},
-            {Value : attribution}
-
-        
+            {
+                $Type : 'UI.DataFieldWithUrl',
+                Value : baseMapType.endPoint,
+                Url   : baseMapType.endPoint
+            }
         ]}
     }
 ) {
     ID                      @title : '{i18n>id}'  @readonly;
-    name                    @title : '{i18n>name}'  @readonly;
+    name                    @title : '{i18n>name}';
     description             @title : '{i18n>description}';
     baseMapType             @(
         title  : '{i18n>baseMapType}',
         Common : {
+            Text                     : {
+                $value                 : baseMapType.bmType,
+                ![@UI.TextArrangement] : #TextOnly
+            },
             ValueListWithFixedValues : true,
             ValueList                : {
                 CollectionPath : 'BaseMaps',
@@ -94,19 +102,7 @@ annotate CatalogService.MapConfiguration with @(
     );
 
     defaultMapConfiguration @title : '{i18n>defaultMapConfiguration}';
-    defaultCenter           @(
-        title  : '{i18n>defaultCenter}',
-        common : {ValueList:{
-            CollectionPath:'BaseMaps',
-            Parameters:[
-                {
-                        $Type             : 'Common.ValueListParameterInOut',
-                        LocalDataProperty : MapConfiguration,
-                        ValueListProperty : 'defaultZoomLevel'
-                    }
-            ]
-        }}
-    );
+    defaultCenter           @title : '{i18n>defaultCenter}';
     defaultZoomLevel        @title : '{i18n>defaultZoomLevel}';
     maxZoom                 @title : '{i18n>maxZoom}';
     attribution             @title : '{i18n>attribution}';
@@ -114,6 +110,11 @@ annotate CatalogService.MapConfiguration with @(
     mapRendererType         @(
         title  : '{i18n>mapRendererType}',
         Common : {
+            Text                     : {
+                $value                 : mapRendererType.mrType,
+                ![@UI.TextArrangement] : #TextOnly
+            },
+
             ValueListWithFixedValues : true,
             ValueList                : {
                 CollectionPath : 'MapRenderer',
@@ -130,6 +131,7 @@ annotate CatalogService.MapConfiguration with @(
                 ]
             }
         }
+
     );
 
 };

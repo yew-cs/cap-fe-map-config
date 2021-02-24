@@ -45,3 +45,6 @@ entity MapRenderer : cuid, managed {
 
 }
 
+extend MapConfiguration with {
+    level : Integer;
+}
