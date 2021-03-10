@@ -1,3 +1,5 @@
-name;description;baseMapType_ID;defaultMapConfiguration;defaultCenter;defaultZoomLevel; maxZoom;attribution; accessToken ;mapRendererType_ID
-rizing-poc-esri-map;Rizing POC Configuration for Esri;1001;true;-2.951805, 8.367183;50;100;NASA. Powered by Esri;none;101
-rizing-poc-here-berlin;Rizing POC Configuration for Here;1005;0;-2.951805, 8.367183;80;100;NASA. Powered by HERE;none;102
+name;description;baseMapType_ID;defaultMapConfiguration;defaultCenter;defaultZoomLevel; maxZoom;attribution; accessToken ;mapRendererType_ID;options;
+rizing-poc-esri-map;Rizing POC Configuration for Esri;1001;true;-2.951805, 8.367183;50;100;NASA. Powered by Esri;none;101;{minPitch: 75,interactive: false,keyboard: false};
+
+rizing-poc-here-berlin;Rizing POC Configuration for Here;1005;0;-2.951805, 8.367183;80;100;NASA. Powered by HERE;none;102;{ trackResize: true,dragging: true,zoomAnimation: false,tapTolerance: 15};
+

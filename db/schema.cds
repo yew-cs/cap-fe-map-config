@@ -23,6 +23,7 @@ entity MapConfiguration : cuid, managed {
         attribution             : String(60);
         accessToken             : String(100);
         mapRendererType         : Association to MapRenderer @title        :             'Map Renderer Type';
+        Options                 : LargeString;
 
 }
 
@@ -46,5 +47,5 @@ entity MapRenderer : cuid, managed {
 }
 
 extend MapConfiguration with {
-    level : Integer;
+        level : Integer;
 }

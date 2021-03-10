@@ -42,6 +42,7 @@ annotate CatalogService.MapConfiguration with @(
         HeaderFacets                   : [{
             $Type  : 'UI.ReferenceFacet',
             Target : '@UI.FieldGroup#MapConfigurations',
+            Label  : '{i18n>summary}'
         }],
         FieldGroup #MapConfigurations  : {Data : [
 
@@ -69,7 +70,8 @@ annotate CatalogService.MapConfiguration with @(
                 $Type : 'UI.DataFieldWithUrl',
                 Value : baseMapType.endPoint,
                 Url   : baseMapType.endPoint
-            }
+            },
+            {Value : Options}
         ]}
     }
 ) {
@@ -133,6 +135,10 @@ annotate CatalogService.MapConfiguration with @(
         }
 
     );
+    Options                 @(
+        title : '{i18n>options}',
+        UI    : {MultiLineText : true}
+    )
 
 };
 
@@ -179,5 +185,8 @@ annotate CatalogService.BaseMaps with {
     );
     bmDesc   @title : '{i18n>bmDesc}';
     endPoint @title : '{i18n>endPoint}';
-    summary  @title : '{i18n>summary}';
+    summary  @(
+        title : '{i18n>summary}',
+        UI    : {MultiLineText : true}
+    );
 };
