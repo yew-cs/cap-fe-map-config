@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="SapNetworkGeoConfig" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Actions" EntityType="SapNetworkGeoConfig.Actions"/>
+                <EntitySet Name="Actions_in_Scenarios" EntityType="SapNetworkGeoConfig.Actions_in_Scenarios"/>
+                <EntitySet Name="Actions_texts" EntityType="SapNetworkGeoConfig.Actions_texts"/>
+                <EntitySet Name="BusinessObjectTypes" EntityType="SapNetworkGeoConfig.BusinessObjectTypes"/>
+                <EntitySet Name="BusinessObjectTypes_texts" EntityType="SapNetworkGeoConfig.BusinessObjectTypes_texts"/>
+                <EntitySet Name="BusinessObjects_in_Scenarios" EntityType="SapNetworkGeoConfig.BusinessObjects_in_Scenarios"/>
+                <EntitySet Name="LayerTypes" EntityType="SapNetworkGeoConfig.LayerTypes"/>
+                <EntitySet Name="LayerTypes_texts" EntityType="SapNetworkGeoConfig.LayerTypes_texts"/>
+                <EntitySet Name="Layers" EntityType="SapNetworkGeoConfig.Layers"/>
+                <EntitySet Name="Layers_in_Scenarios" EntityType="SapNetworkGeoConfig.Layers_in_Scenarios"/>
+                <EntitySet Name="Layers_texts" EntityType="SapNetworkGeoConfig.Layers_texts"/>
+                <EntitySet Name="Renderers" EntityType="SapNetworkGeoConfig.Renderers"/>
+                <EntitySet Name="Renderers_texts" EntityType="SapNetworkGeoConfig.Renderers_texts"/>
+                <EntitySet Name="Scenarios" EntityType="SapNetworkGeoConfig.Scenarios"/>
+                <EntitySet Name="Scenarios_texts" EntityType="SapNetworkGeoConfig.Scenarios_texts"/>
+                <FunctionImport Name="get" ReturnType="Edm.String" m:HttpMethod="GET">
+                    <Parameter Name="clientId" Type="Edm.String" Mode="In" Nullable="true"/>
+                </FunctionImport>
+                <AssociationSet Name="Actions_appliesToBusinessObjectType" Association="SapNetworkGeoConfig.Actions_appliesToBusinessObjectType">
+                    <End Role="Actions" EntitySet="Actions"/>
+                    <End Role="BusinessObjectTypes" EntitySet="BusinessObjectTypes"/>
+                </AssociationSet>
+                <AssociationSet Name="Actions_texts_1" Association="SapNetworkGeoConfig.Actions_texts_1">
+                    <End Role="Actions" EntitySet="Actions"/>
+                    <End Role="Actions_texts" EntitySet="Actions_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Actions_localized" Association="SapNetworkGeoConfig.Actions_localized">
+                    <End Role="Actions" EntitySet="Actions"/>
+                    <End Role="Actions_texts" EntitySet="Actions_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Actions_in_Scenarios_scenario" Association="SapNetworkGeoConfig.Actions_in_Scenarios_scenario">
+                    <End Role="Actions_in_Scenarios" EntitySet="Actions_in_Scenarios"/>
+                    <End Role="Scenarios" EntitySet="Scenarios"/>
+                </AssociationSet>
+                <AssociationSet Name="Actions_in_Scenarios_action" Association="SapNetworkGeoConfig.Actions_in_Scenarios_action">
+                    <End Role="Actions_in_Scenarios" EntitySet="Actions_in_Scenarios"/>
+                    <End Role="Actions" EntitySet="Actions"/>
+                </AssociationSet>
+                <AssociationSet Name="BusinessObjectTypes_texts_1" Association="SapNetworkGeoConfig.BusinessObjectTypes_texts_1">
+                    <End Role="BusinessObjectTypes" EntitySet="BusinessObjectTypes"/>
+                    <End Role="BusinessObjectTypes_texts" EntitySet="BusinessObjectTypes_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="BusinessObjectTypes_localized" Association="SapNetworkGeoConfig.BusinessObjectTypes_localized">
+                    <End Role="BusinessObjectTypes" EntitySet="BusinessObjectTypes"/>
+                    <End Role="BusinessObjectTypes_texts" EntitySet="BusinessObjectTypes_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="BusinessObjects_in_Scenarios_scenario" Association="SapNetworkGeoConfig.BusinessObjects_in_Scenarios_scenario">
+                    <End Role="BusinessObjects_in_Scenarios" EntitySet="BusinessObjects_in_Scenarios"/>
+                    <End Role="Scenarios" EntitySet="Scenarios"/>
+                </AssociationSet>
+                <AssociationSet Name="BusinessObjects_in_Scenarios_businessObject" Association="SapNetworkGeoConfig.BusinessObjects_in_Scenarios_businessObject">
+                    <End Role="BusinessObjects_in_Scenarios" EntitySet="BusinessObjects_in_Scenarios"/>
+                    <End Role="BusinessObjectTypes" EntitySet="BusinessObjectTypes"/>
+                </AssociationSet>
+                <AssociationSet Name="LayerTypes_texts_1" Association="SapNetworkGeoConfig.LayerTypes_texts_1">
+                    <End Role="LayerTypes" EntitySet="LayerTypes"/>
+                    <End Role="LayerTypes_texts" EntitySet="LayerTypes_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="LayerTypes_localized" Association="SapNetworkGeoConfig.LayerTypes_localized">
+                    <End Role="LayerTypes" EntitySet="LayerTypes"/>
+                    <End Role="LayerTypes_texts" EntitySet="LayerTypes_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Layers_layerType" Association="SapNetworkGeoConfig.Layers_layerType">
+                    <End Role="Layers" EntitySet="Layers"/>
+                    <End Role="LayerTypes" EntitySet="LayerTypes"/>
+                </AssociationSet>
+                <AssociationSet Name="Layers_texts_1" Association="SapNetworkGeoConfig.Layers_texts_1">
+                    <End Role="Layers" EntitySet="Layers"/>
+                    <End Role="Layers_texts" EntitySet="Layers_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Layers_localized" Association="SapNetworkGeoConfig.Layers_localized">
+                    <End Role="Layers" EntitySet="Layers"/>
+                    <End Role="Layers_texts" EntitySet="Layers_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Layers_in_Scenarios_scenario" Association="SapNetworkGeoConfig.Layers_in_Scenarios_scenario">
+                    <End Role="Layers_in_Scenarios" EntitySet="Layers_in_Scenarios"/>
+                    <End Role="Scenarios" EntitySet="Scenarios"/>
+                </AssociationSet>
+                <AssociationSet Name="Layers_in_Scenarios_layer" Association="SapNetworkGeoConfig.Layers_in_Scenarios_layer">
+                    <End Role="Layers_in_Scenarios" EntitySet="Layers_in_Scenarios"/>
+                    <End Role="Layers" EntitySet="Layers"/>
+                </AssociationSet>
+                <AssociationSet Name="Renderers_texts_1" Association="SapNetworkGeoConfig.Renderers_texts_1">
+                    <End Role="Renderers" EntitySet="Renderers"/>
+                    <End Role="Renderers_texts" EntitySet="Renderers_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Renderers_localized" Association="SapNetworkGeoConfig.Renderers_localized">
+                    <End Role="Renderers" EntitySet="Renderers"/>
+                    <End Role="Renderers_texts" EntitySet="Renderers_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Scenarios_renderer" Association="SapNetworkGeoConfig.Scenarios_renderer">
+                    <End Role="Scenarios" EntitySet="Scenarios"/>
+                    <End Role="Renderers" EntitySet="Renderers"/>
+                </AssociationSet>
+                <AssociationSet Name="Scenarios_texts_1" Association="SapNetworkGeoConfig.Scenarios_texts_1">
+                    <End Role="Scenarios" EntitySet="Scenarios"/>
+                    <End Role="Scenarios_texts" EntitySet="Scenarios_texts"/>
+                </AssociationSet>
+                <AssociationSet Name="Scenarios_localized" Association="SapNetworkGeoConfig.Scenarios_localized">
+                    <End Role="Scenarios" EntitySet="Scenarios"/>
+                    <End Role="Scenarios_texts" EntitySet="Scenarios_texts"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Actions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="clientId" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="appliesTo" Type="Edm.String"/>
+                <NavigationProperty Name="appliesToBusinessObjectType" Relationship="SapNetworkGeoConfig.Actions_appliesToBusinessObjectType" FromRole="Actions" ToRole="BusinessObjectTypes"/>
+                <Property Name="linkToApi" Type="Edm.String"/>
+                <Property Name="interactionType" Type="Edm.String"/>
+                <Property Name="jsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="SapNetworkGeoConfig.Actions_texts_1" FromRole="Actions" ToRole="Actions_texts"/>
+                <NavigationProperty Name="localized" Relationship="SapNetworkGeoConfig.Actions_localized" FromRole="Actions" ToRole="Actions_texts"/>
+                <Property Name="appliesToBusinessObjectType_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Actions_in_Scenarios">
+                <NavigationProperty Name="scenario" Relationship="SapNetworkGeoConfig.Actions_in_Scenarios_scenario" FromRole="Actions_in_Scenarios" ToRole="Scenarios"/>
+                <NavigationProperty Name="action" Relationship="SapNetworkGeoConfig.Actions_in_Scenarios_action" FromRole="Actions_in_Scenarios" ToRole="Actions"/>
+                <Property Name="scenario_ID" Type="Edm.Guid"/>
+                <Property Name="action_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Actions_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="BusinessObjectTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="clientId" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="jsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="SapNetworkGeoConfig.BusinessObjectTypes_texts_1" FromRole="BusinessObjectTypes" ToRole="BusinessObjectTypes_texts"/>
+                <NavigationProperty Name="localized" Relationship="SapNetworkGeoConfig.BusinessObjectTypes_localized" FromRole="BusinessObjectTypes" ToRole="BusinessObjectTypes_texts"/>
+            </EntityType>
+            <EntityType Name="BusinessObjectTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="BusinessObjects_in_Scenarios">
+                <NavigationProperty Name="scenario" Relationship="SapNetworkGeoConfig.BusinessObjects_in_Scenarios_scenario" FromRole="BusinessObjects_in_Scenarios" ToRole="Scenarios"/>
+                <NavigationProperty Name="businessObject" Relationship="SapNetworkGeoConfig.BusinessObjects_in_Scenarios_businessObject" FromRole="BusinessObjects_in_Scenarios" ToRole="BusinessObjectTypes"/>
+                <Property Name="scenario_ID" Type="Edm.Guid"/>
+                <Property Name="businessObject_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="LayerTypes">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+                <NavigationProperty Name="toLayers" Relationship="SapNetworkGeoConfig.Layers_layerType" FromRole="LayerTypes" ToRole="Layers"/>
+                <NavigationProperty Name="texts" Relationship="SapNetworkGeoConfig.LayerTypes_texts_1" FromRole="LayerTypes" ToRole="LayerTypes_texts"/>
+                <NavigationProperty Name="localized" Relationship="SapNetworkGeoConfig.LayerTypes_localized" FromRole="LayerTypes" ToRole="LayerTypes_texts"/>
+            </EntityType>
+            <EntityType Name="LayerTypes_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+                <Property Name="Name" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Layers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="clientId" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="serviceType" Type="Edm.String"/>
+                <Property Name="serviceUrl" Type="Edm.String"/>
+                <Property Name="odataFieldNameGeometry" Type="Edm.String"/>
+                <Property Name="odataFieldNameProperties" Type="Edm.String"/>
+                <NavigationProperty Name="layerType" Relationship="SapNetworkGeoConfig.Layers_layerType" FromRole="Layers" ToRole="LayerTypes"/>
+                <Property Name="minZoom" Type="Edm.Int32"/>
+                <Property Name="layoutJson" Type="Edm.String"/>
+                <Property Name="paintJson" Type="Edm.String"/>
+                <Property Name="markerUrl" Type="Edm.String"/>
+                <Property Name="markerFallback" Type="Edm.String"/>
+                <Property Name="jsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="SapNetworkGeoConfig.Layers_texts_1" FromRole="Layers" ToRole="Layers_texts"/>
+                <NavigationProperty Name="localized" Relationship="SapNetworkGeoConfig.Layers_localized" FromRole="Layers" ToRole="Layers_texts"/>
+                <Property Name="layerType_ID" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="Layers_in_Scenarios">
+                <NavigationProperty Name="scenario" Relationship="SapNetworkGeoConfig.Layers_in_Scenarios_scenario" FromRole="Layers_in_Scenarios" ToRole="Scenarios"/>
+                <NavigationProperty Name="layer" Relationship="SapNetworkGeoConfig.Layers_in_Scenarios_layer" FromRole="Layers_in_Scenarios" ToRole="Layers"/>
+                <Property Name="scenario_ID" Type="Edm.Guid"/>
+                <Property Name="layer_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Layers_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Renderers">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="clientId" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <Property Name="license" Type="Edm.String"/>
+                <Property Name="licenseToken" Type="Edm.String"/>
+                <Property Name="cloudFoundryDestination" Type="Edm.String"/>
+                <Property Name="url" Type="Edm.String"/>
+                <Property Name="defaultCenterLatitude" Type="Edm.Double"/>
+                <Property Name="defaultCenterLongitude" Type="Edm.Double"/>
+                <Property Name="defaultZoomLevel" Type="Edm.Int32"/>
+                <Property Name="jsonString" Type="Edm.String"/>
+                <Property Name="jsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="texts" Relationship="SapNetworkGeoConfig.Renderers_texts_1" FromRole="Renderers" ToRole="Renderers_texts"/>
+                <NavigationProperty Name="localized" Relationship="SapNetworkGeoConfig.Renderers_localized" FromRole="Renderers" ToRole="Renderers_texts"/>
+            </EntityType>
+            <EntityType Name="Renderers_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Scenarios">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="clientId" Type="Edm.Guid"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+                <NavigationProperty Name="renderer" Relationship="SapNetworkGeoConfig.Scenarios_renderer" FromRole="Scenarios" ToRole="Renderers"/>
+                <Property Name="jsonConfig" Type="Edm.String"/>
+                <NavigationProperty Name="businessObjects" Relationship="SapNetworkGeoConfig.BusinessObjects_in_Scenarios_scenario" FromRole="Scenarios" ToRole="BusinessObjects_in_Scenarios"/>
+                <NavigationProperty Name="layers" Relationship="SapNetworkGeoConfig.Layers_in_Scenarios_scenario" FromRole="Scenarios" ToRole="Layers_in_Scenarios"/>
+                <NavigationProperty Name="actions" Relationship="SapNetworkGeoConfig.Actions_in_Scenarios_scenario" FromRole="Scenarios" ToRole="Actions_in_Scenarios"/>
+                <NavigationProperty Name="texts" Relationship="SapNetworkGeoConfig.Scenarios_texts_1" FromRole="Scenarios" ToRole="Scenarios_texts"/>
+                <NavigationProperty Name="localized" Relationship="SapNetworkGeoConfig.Scenarios_localized" FromRole="Scenarios" ToRole="Scenarios_texts"/>
+                <Property Name="renderer_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Scenarios_texts">
+                <Key>
+                    <PropertyRef Name="locale"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="locale" Type="Edm.String" MaxLength="14" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="name" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="Actions_appliesToBusinessObjectType">
+                <End Role="Actions" Type="SapNetworkGeoConfig.Actions" Multiplicity="*"/>
+                <End Role="BusinessObjectTypes" Type="SapNetworkGeoConfig.BusinessObjectTypes" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="BusinessObjectTypes">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Actions">
+                        <PropertyRef Name="appliesToBusinessObjectType_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Actions_texts_1">
+                <End Role="Actions" Type="SapNetworkGeoConfig.Actions" Multiplicity="*"/>
+                <End Role="Actions_texts" Type="SapNetworkGeoConfig.Actions_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Actions_localized">
+                <End Role="Actions" Type="SapNetworkGeoConfig.Actions" Multiplicity="*"/>
+                <End Role="Actions_texts" Type="SapNetworkGeoConfig.Actions_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Actions_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Actions">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Actions_in_Scenarios_scenario">
+                <End Role="Actions_in_Scenarios" Type="SapNetworkGeoConfig.Actions_in_Scenarios" Multiplicity="*"/>
+                <End Role="Scenarios" Type="SapNetworkGeoConfig.Scenarios" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Scenarios">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Actions_in_Scenarios">
+                        <PropertyRef Name="scenario_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Actions_in_Scenarios_action">
+                <End Role="Actions_in_Scenarios" Type="SapNetworkGeoConfig.Actions_in_Scenarios" Multiplicity="*"/>
+                <End Role="Actions" Type="SapNetworkGeoConfig.Actions" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Actions">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Actions_in_Scenarios">
+                        <PropertyRef Name="action_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="BusinessObjectTypes_texts_1">
+                <End Role="BusinessObjectTypes" Type="SapNetworkGeoConfig.BusinessObjectTypes" Multiplicity="*"/>
+                <End Role="BusinessObjectTypes_texts" Type="SapNetworkGeoConfig.BusinessObjectTypes_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="BusinessObjectTypes_localized">
+                <End Role="BusinessObjectTypes" Type="SapNetworkGeoConfig.BusinessObjectTypes" Multiplicity="*"/>
+                <End Role="BusinessObjectTypes_texts" Type="SapNetworkGeoConfig.BusinessObjectTypes_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="BusinessObjectTypes_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="BusinessObjectTypes">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="BusinessObjects_in_Scenarios_scenario">
+                <End Role="BusinessObjects_in_Scenarios" Type="SapNetworkGeoConfig.BusinessObjects_in_Scenarios" Multiplicity="*"/>
+                <End Role="Scenarios" Type="SapNetworkGeoConfig.Scenarios" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Scenarios">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="BusinessObjects_in_Scenarios">
+                        <PropertyRef Name="scenario_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="BusinessObjects_in_Scenarios_businessObject">
+                <End Role="BusinessObjects_in_Scenarios" Type="SapNetworkGeoConfig.BusinessObjects_in_Scenarios" Multiplicity="*"/>
+                <End Role="BusinessObjectTypes" Type="SapNetworkGeoConfig.BusinessObjectTypes" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="BusinessObjectTypes">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="BusinessObjects_in_Scenarios">
+                        <PropertyRef Name="businessObject_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="LayerTypes_texts_1">
+                <End Role="LayerTypes" Type="SapNetworkGeoConfig.LayerTypes" Multiplicity="*"/>
+                <End Role="LayerTypes_texts" Type="SapNetworkGeoConfig.LayerTypes_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="LayerTypes_localized">
+                <End Role="LayerTypes" Type="SapNetworkGeoConfig.LayerTypes" Multiplicity="*"/>
+                <End Role="LayerTypes_texts" Type="SapNetworkGeoConfig.LayerTypes_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="LayerTypes_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="LayerTypes">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Layers_layerType">
+                <End Role="Layers" Type="SapNetworkGeoConfig.Layers" Multiplicity="*"/>
+                <End Role="LayerTypes" Type="SapNetworkGeoConfig.LayerTypes" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="LayerTypes">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Layers">
+                        <PropertyRef Name="layerType_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Layers_texts_1">
+                <End Role="Layers" Type="SapNetworkGeoConfig.Layers" Multiplicity="*"/>
+                <End Role="Layers_texts" Type="SapNetworkGeoConfig.Layers_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Layers_localized">
+                <End Role="Layers" Type="SapNetworkGeoConfig.Layers" Multiplicity="*"/>
+                <End Role="Layers_texts" Type="SapNetworkGeoConfig.Layers_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Layers_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Layers">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Layers_in_Scenarios_scenario">
+                <End Role="Layers_in_Scenarios" Type="SapNetworkGeoConfig.Layers_in_Scenarios" Multiplicity="*"/>
+                <End Role="Scenarios" Type="SapNetworkGeoConfig.Scenarios" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Scenarios">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Layers_in_Scenarios">
+                        <PropertyRef Name="scenario_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Layers_in_Scenarios_layer">
+                <End Role="Layers_in_Scenarios" Type="SapNetworkGeoConfig.Layers_in_Scenarios" Multiplicity="*"/>
+                <End Role="Layers" Type="SapNetworkGeoConfig.Layers" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Layers">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Layers_in_Scenarios">
+                        <PropertyRef Name="layer_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Renderers_texts_1">
+                <End Role="Renderers" Type="SapNetworkGeoConfig.Renderers" Multiplicity="*"/>
+                <End Role="Renderers_texts" Type="SapNetworkGeoConfig.Renderers_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Renderers_localized">
+                <End Role="Renderers" Type="SapNetworkGeoConfig.Renderers" Multiplicity="*"/>
+                <End Role="Renderers_texts" Type="SapNetworkGeoConfig.Renderers_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Renderers_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Renderers">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Scenarios_renderer">
+                <End Role="Scenarios" Type="SapNetworkGeoConfig.Scenarios" Multiplicity="*"/>
+                <End Role="Renderers" Type="SapNetworkGeoConfig.Renderers" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Renderers">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Scenarios">
+                        <PropertyRef Name="renderer_ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Scenarios_texts_1">
+                <End Role="Scenarios" Type="SapNetworkGeoConfig.Scenarios" Multiplicity="*"/>
+                <End Role="Scenarios_texts" Type="SapNetworkGeoConfig.Scenarios_texts" Multiplicity="*">
+                    <OnDelete Action="Cascade"/>
+                </End>
+            </Association>
+            <Association Name="Scenarios_localized">
+                <End Role="Scenarios" Type="SapNetworkGeoConfig.Scenarios" Multiplicity="*"/>
+                <End Role="Scenarios_texts" Type="SapNetworkGeoConfig.Scenarios_texts" Multiplicity="0..1"/>
+                <ReferentialConstraint>
+                    <Principal Role="Scenarios_texts">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="Scenarios">
+                        <PropertyRef Name="ID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="SapNetworkGeoConfig.LayerTypes/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="ID"/>
+                <Annotation Term="Common.Text" Path="Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="UI.Hidden" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.LayerTypes/Name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.LayerTypes_texts/Name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Layer Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Layer"/>
+                <Annotation Term="UI.Facets">
+                    <Collection>
+                        <Record Type="UI.ReferenceFacet">
+                            <PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#GeneralInformation"/>
+                            <PropertyValue Property="Label" String="General Information"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.FieldGroup" Qualifier="GeneralInformation">
+                    <Record Type="UI.FieldGroupType">
+                        <PropertyValue Property="Data">
+                            <Collection>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="serviceType"/>
+                                </Record>
+                                <Record Type="UI.DataFieldWithUrl">
+                                    <PropertyValue Property="Value" Path="serviceUrl"/>
+                                    <PropertyValue Property="Url" Path="serviceUrl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="odataFieldNameGeometry"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="odataFieldNameProperties"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="layerType_ID"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="layoutJson"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="paintJson"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="markerUrl"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="markerFallback"/>
+                                </Record>
+                                <Record Type="UI.DataField">
+                                    <PropertyValue Property="Value" Path="jsonConfig"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.HeaderInfo">
+                    <Record Type="UI.HeaderInfoType">
+                        <PropertyValue Property="Description">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="description"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="Title">
+                            <Record Type="UI.DataField">
+                                <PropertyValue Property="Value" Path="name"/>
+                            </Record>
+                        </PropertyValue>
+                        <PropertyValue Property="TypeName" String="Layer"/>
+                        <PropertyValue Property="TypeNamePlural" String="Layers"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="name"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="description"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="layerType_ID"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="minZoom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="serviceType"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>name</PropertyPath>
+                        <PropertyPath>layerType_ID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/name" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Name"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/description" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Description"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/serviceType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Service Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/serviceUrl" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Service Url"/>
+                <Annotation Term="UI.MultiLineText" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/odataFieldNameGeometry" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Odata Field Name Geometry"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/odataFieldNameProperties" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Odata Field Name Properties"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/layerType" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Layer Type"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/minZoom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Min Zoom"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/layoutJson" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Layout Json"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/paintJson" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Paint Json"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/markerUrl" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Marker Url"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/markerFallback" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Marker Fallback"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/jsonConfig" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Json Config"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Layers/layerType_ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Label" String="Layer Type"/>
+                <Annotation Term="Common.Text" Path="layerType/Name">
+                    <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/>
+                </Annotation>
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="LayerTypes"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="layerType_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="ID"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Name"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/defaultCenterLatitude" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.Maximum" Int="180"/>
+                <Annotation Term="Validation.Minimum" Int="-180"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/defaultCenterLongitude" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.Maximum" Int="180"/>
+                <Annotation Term="Validation.Minimum" Int="-180"/>
+            </Annotations>
+            <Annotations Target="SapNetworkGeoConfig.Renderers/defaultZoomLevel" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Validation.Maximum" Int="100"/>
+                <Annotation Term="Validation.Minimum" Int="0"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
